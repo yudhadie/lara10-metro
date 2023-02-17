@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Setting\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +23,13 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    ])->prefix('dashboard')->group(function () {
+
+    //Dashboard
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    //Setting
+        //User
+        Route::resource('/setting/user', UserController::class);
+
 });
