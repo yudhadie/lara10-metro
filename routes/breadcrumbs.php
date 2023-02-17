@@ -17,7 +17,7 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
 //Setting
 Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Setting');
+    $trail->push('Setting','#');
 });
 
     //User
