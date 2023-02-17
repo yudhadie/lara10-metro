@@ -1,5 +1,10 @@
 <head>
-    <title>Triton Creative</title>
+    <title>
+        @isset($title)
+            {{$title}} -
+        @endisset
+        Triton Creative
+    </title>
     <meta charset="utf-8" />
     <meta name="description" content="tritoncreative.id" />
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />

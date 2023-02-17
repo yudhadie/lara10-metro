@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class UserController extends Controller
     {
         return view('admin.setting.user.index',[
             'title' => 'Users',
-            // 'breadcrumbs' => Breadcrumbs::render('dashboard'),
+            'breadcrumbs' => Breadcrumbs::render('user'),
         ]);
     }
 

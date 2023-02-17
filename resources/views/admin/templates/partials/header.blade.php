@@ -132,8 +132,15 @@
                         <div class="menu-item px-5 my-1">
                             <a href="#" class="menu-link px-5">Account Settings</a>
                         </div>
-                        <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">Sign Out</a>
+                        <div class="menu-item px-5"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <a href="{{ route('logout') }}" class="menu-link px-5">
+                                Sign Out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
