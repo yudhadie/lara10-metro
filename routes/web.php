@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\Setting\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,9 @@ Route::middleware([
     //Setting
         //User
         Route::resource('/setting/user', UserController::class);
+
+    //Datatables
+        //Settings
+        Route::get('/setting/user-data', [DataController::class, 'user'])->name('data.user');
 
 });
