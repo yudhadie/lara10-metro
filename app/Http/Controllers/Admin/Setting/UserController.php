@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\Team;
+use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,9 +18,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        $teams = Team::orderby('name','asc')->get();
+
         return view('admin.setting.user.index',[
             'title' => 'Users',
             'breadcrumbs' => Breadcrumbs::render('user'),
+            'teams' => $teams,
         ]);
     }
 
@@ -34,7 +40,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|unique:users|max:255',
+        ]);
+
+        $data = new User();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password = bcrypt($request->password);
+        $data->current_team_id = $request->current_team_id;
+        $data->active = $request->active;
+        $data->save();
+
+        return redirect()->route('user.index')->with('success', 'Data user berhasil ditambahkan');
+
+
     }
 
     /**
@@ -50,7 +70,15 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = User::FindOrFail($id);
+        $teams = Team::orderby('name','asc')->get();
+
+        return view('admin.setting.user.edit',[
+            'title' => 'Users',
+            'breadcrumbs' => Breadcrumbs::render('user.edit',$data),
+            'teams' => $teams,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -66,6 +94,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = User::find($id);
+
+        $photo = $data->profile_photo_path;
+        if ($photo != null) {
+            Storage::delete($photo);
+        }
+        $data->delete();
+
+        return redirect()->route('user.index')->with('error', 'Data User berhasil dihapus');
     }
 }

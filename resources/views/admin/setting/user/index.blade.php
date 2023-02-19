@@ -25,6 +25,12 @@
         </div>
     </div>
 
+    <form action="" method="post" id="deleteForm">
+        @csrf
+        @method("DELETE")
+        <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
+    </form>
+
     @include('admin.setting.user.modal')
 
 @endsection
@@ -117,6 +123,15 @@
                 }, false)
             })
         })()
+    </script>
+    <script>
+        // Submit button handler
+        const submitButton = document.getElementById('modal_form_submit');
+            submitButton.addEventListener('click', function (e) {
+            submitButton.setAttribute('data-kt-indicator', 'on');
+            submitButton.disabled = true;
+            modal_add_form.submit();
+        });
     </script>
 
 @endpush

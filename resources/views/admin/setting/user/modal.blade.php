@@ -13,29 +13,74 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="modal_add_form" class="form needs-validation" novalidate action="#">
-                    <div class="fv-row mb-7">
-                        <label class="fs-6 fw-semibold form-label mb-2">
-                            <span class="required">Permission Name</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Permission names is required to be unique."></i>
-                        </label>
-                        <input class="form-control form-control-solid" placeholder="Enter a permission name" name="permission_name" required/>
-                        <div class="invalid-feedback">
-                            Please choose a username.
+                <form class="form needs-validation" action="{{ route('user.store') }}" method="post" id="modal_add_form" novalidate enctype="multipart/form-data">
+                    {{ csrf_field() }} {{ method_field('POST') }}
+                    <div class="row mb-7">
+                        <div class="col-12 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Name</span>
+                            </label>
+                            <input class="form-control form-control-solid" placeholder="Enter a name" name="name" autofocus required/>
+                            <div class="invalid-feedback">
+                                Silahkan isi nama!
+                            </div>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Email</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
+                            </label>
+                            <input class="form-control form-control-solid" type="email" placeholder="Email" name="email" required/>
+                            <div class="invalid-feedback">
+                                Silahkan isi email!
+                            </div>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Password</span>
+                            </label>
+                            <input class="form-control form-control-solid" type="password" placeholder="Password" name="password" required/>
+                            <div class="invalid-feedback">
+                                Silahkan isi password!
+                            </div>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Role</span>
+                            </label>
+                            <select name="current_team_id" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Role..." class="form-control form-control-solid" required>
+                                <option value="">Select a Roles...</option>
+                                @foreach ($teams as $team)
+                                    <option value="{{$team->id}}">{{$team->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                Silahkan pilih role!
+                            </div>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Status</span>
+                            </label>
+                            <select name="active" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Status..." class="form-control form-control-solid" required>
+                                <option value="1">Active</option>
+                                <option value="0">Non Active</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Silahkan pilih status!
+                            </div>
+                        </div>
+                        <div class="col-12 mb-5">
+                            <label class="fs-6 fw-semibold form-label mb-2">
+                                <span>Photo</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
+                            </label>
+                            <input class="form-control form-control-solid" type="file" placeholder="Photo" name="photo"/>
                         </div>
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="form-check form-check-custom form-check-solid me-9">
-                            <input class="form-check-input" type="checkbox" value="" name="permissions_core" id="kt_permissions_core" />
-                            <span class="form-check-label" for="kt_permissions_core">Set as core permission</span>
-                        </label>
-                    </div>
-                    <div class="text-gray-600">Permission set as a
-                    <strong class="me-1">Core Permission</strong>will be locked and
-                    <strong class="me-1">not editable</strong>in future</div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button>
-                        <button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
+                        <button type="submit" class="btn btn-primary" id="modal_form_submit" data-kt-permissions-modal-action="submit">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

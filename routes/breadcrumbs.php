@@ -25,7 +25,7 @@ Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
         $trail->parent('setting');
         $trail->push('User', route('user.index'));
     });
-    Breadcrumbs::for('user.edit', function (BreadcrumbTrail $trail, $user) {
+    Breadcrumbs::for('user.edit', function (BreadcrumbTrail $trail, $data) {
         $trail->parent('user');
-        $trail->push($user->name);
+        $trail->push($data->name);
     });
