@@ -9,18 +9,20 @@
                     <h3 class="card-title">User Detail</h3>
                 </div>
                 <div class="card-body pt-0">
-                    <form class="form needs-validation mt-7" action="{{ route('role-user.update',$data) }}" method="post" id="modal_add_form" novalidate>
+                    <form class="form mt-7" action="{{ route('role-user.update',$data) }}" method="post" id="modal_form_form">
                         {{ csrf_field() }} {{ method_field('PUT') }}
-                        <div class="row mb-7">
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Name</span>
-                                </label>
-                                <input class="form-control form-control-solid" placeholder="Enter a name" name="name" value="{{$data->name}}" required/>
+                        <div class="d-flex flex-column fv-row">
+                            <div class="row mb-7">
+                                <div class="col-12 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">Name</span>
+                                    </label>
+                                    <input class="form-control form-control-solid" placeholder="Enter a name" name="name" value="{{$data->name}}" required/>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                            <a href="{{ route('user.index') }}" class="btn btn-light me-3">Back</a>
+                            <a href="{{ route('role-user.index') }}" class="btn btn-light me-3">Back</a>
                             <button type="submit" class="btn btn-primary" id="modal_form_submit">
                                 <span class="indicator-label">Save</span>
                                 <span class="indicator-progress">Please wait...
@@ -49,19 +51,43 @@
             element2.classList.add('active');
     </script>
     <script>
-        (() => {
-        'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
+        const form = document.getElementById('modal_form_form');
+        var validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {
+                    'name': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi nama!'
+                            }
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
                 }
-                form.classList.add('was-validated')
-                }, false)
-            })
-        })()
+            }
+        );
+        const submitButton = document.getElementById('modal_form_submit');
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+                    if (status == 'Valid') {
+                        submitButton.setAttribute('data-kt-indicator', 'on');
+                        submitButton.disabled = true;
+                        form.submit();
+                    }
+                });
+            }
+        });
     </script>
 
 @endpush

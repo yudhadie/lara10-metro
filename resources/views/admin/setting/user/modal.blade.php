@@ -13,54 +13,56 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form class="form needs-validation" action="{{ route('user.store') }}" method="post" id="modal_add_form" novalidate enctype="multipart/form-data">
+                <form class="form" action="{{ route('user.store') }}" method="post" id="modal_form_form" enctype="multipart/form-data">
                     {{ csrf_field() }} {{ method_field('POST') }}
-                    <div class="row mb-7">
-                        <div class="col-12 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Name</span>
-                            </label>
-                            <input class="form-control form-control-solid" placeholder="Enter a name" name="name" autofocus required/>
-                        </div>
-                        <div class="col-6 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Email</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
-                            </label>
-                            <input class="form-control form-control-solid" type="email" placeholder="Email" name="email" required/>
-                        </div>
-                        <div class="col-6 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Password</span>
-                            </label>
-                            <input class="form-control form-control-solid" type="password" placeholder="Password" name="password" required/>
-                        </div>
-                        <div class="col-6 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Role</span>
-                            </label>
-                            <select name="current_team_id" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Role..." class="form-control form-control-solid" required>
-                                <option value="">Select a Roles...</option>
-                                @foreach ($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-6 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Status</span>
-                            </label>
-                            <select name="active" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Status..." class="form-control form-control-solid" required>
-                                <option value="1">Active</option>
-                                <option value="0">Non Active</option>
-                            </select>
-                        </div>
-                        <div class="col-12 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span>Photo</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
-                            </label>
-                            <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
+                    <div class="d-flex flex-column fv-row">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Name</span>
+                                </label>
+                                <input class="form-control form-control-solid" placeholder="Enter a name" name="name" autofocus/>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Email</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
+                                </label>
+                                <input class="form-control form-control-solid" type="email" placeholder="Email" name="email"/>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Password</span>
+                                </label>
+                                <input class="form-control form-control-solid" type="password" placeholder="Password" name="password"/>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Role</span>
+                                </label>
+                                <select name="current_team_id" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Role..." class="form-control form-control-solid">
+                                    <option value="">Select a Roles...</option>
+                                    @foreach ($teams as $team)
+                                        <option value="{{$team->id}}">{{$team->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Status</span>
+                                </label>
+                                <select name="active" data-control="select2" data-dropdown-parent="#modal_add" data-placeholder="Pilih Status..." class="form-control form-control-solid">
+                                    <option value="1">Active</option>
+                                    <option value="0">Non Active</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span>Photo</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
+                                </label>
+                                <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
+                            </div>
                         </div>
                     </div>
                     <div class="text-center pt-15">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\Setting\LogActivityController;
 use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ Route::middleware([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     //Setting
+        //Log Activity
+        Route::get('/setting/log-activity', [LogActivityController::class, 'index'])->name('log-activity.index');
+        Route::get('/setting/log-activity/{id}', [LogActivityController::class, 'show'])->name('log-activity.show');
         //Role User
         Route::resource('/setting/role-user', RoleUserController::class);
         //User
@@ -39,6 +43,7 @@ Route::middleware([
 
     //Datatables
         //Settings
+        Route::get('/setting/log-activity-data', [DataController::class, 'log'])->name('data.log-activity');
         Route::get('/setting/role-user-data', [DataController::class, 'roleuser'])->name('data.role-user');
         Route::get('/setting/user-data', [DataController::class, 'user'])->name('data.user');
 

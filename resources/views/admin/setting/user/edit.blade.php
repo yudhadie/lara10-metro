@@ -9,81 +9,81 @@
                     <h3 class="card-title">User Detail</h3>
                 </div>
                 <div class="card-body pt-0">
-                    <form class="form needs-validation mt-7" action="{{ route('user.update',$data) }}" method="post" id="modal_add_form" novalidate enctype="multipart/form-data">
+                    <form class="form mt-7" action="{{ route('user.update',$data) }}" method="post" id="modal_form_form" novalidate enctype="multipart/form-data">
                         {{ csrf_field() }} {{ method_field('PUT') }}
-                        <div class="row mb-7">
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Name</span>
-                                </label>
-                                <input class="form-control form-control-solid" placeholder="Enter a name" name="name" value="{{$data->name}}" required/>
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Email</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
-                                </label>
-                                <input class="form-control form-control-solid" type="email" placeholder="Email" name="email" value="{{$data->email}}" required/>
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span>Reset Password</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Reset password (optional)"></i>
-                                </label>
-                                <input class="form-control form-control-solid" type="password" placeholder="reset new password" name="password" value=""/>
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Role</span>
-                                </label>
-                                <select name="current_team_id" data-control="select2"  data-placeholder="Pilih Role..." class="form-control form-control-solid" required>
-                                    <option value="{{$data->current_team_id}}" selected>{{$data->currentteam->name}}</option>
-                                    @foreach ($teams as $team)
-                                        <option value="{{$team->id}}">{{$team->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Status</span>
-                                </label>
-                                <select name="active" data-control="select2" data-placeholder="Pilih Status..." class="form-control form-control-solid" required>
-                                    @if ($data->active == 1)
-                                        <option value="1" selected>Active</option>
-                                        <option value="0">Non Active</option>
-                                    @else
-                                        <option value="1">Active</option>
-                                        <option value="0" selected>Non Active</option>
-                                    @endif
-
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                            </div>
-                            <div class="col-lg-6 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span>Photo</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
-                                </label>
-                                <div class="my-3 text-center">
-                                    <img
-                                        src="{{ asset('assets/media/misc/spinner.gif') }}"
-                                        data-src="{{ asset($data->photo) }}"
-                                        class="lozad rounded mw-100 "
-                                        alt=""
-                                    />
+                        <div class="d-flex flex-column fv-row">
+                            <div class="row mb-7">
+                                <div class="col-12 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">Name</span>
+                                    </label>
+                                    <input class="form-control form-control-solid" placeholder="Enter a name" name="name" value="{{$data->name}}"/>
                                 </div>
-                                <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
-                                @isset($data->profile_photo_path)
-                                    <div class="mt-1 text-end">
-                                        <button class="btn btn-danger btn-sm mt-2"
-                                            href="{{ route('delete-photo-user',$data->id) }}"
-                                            id="delete"
-                                            >
-                                            Delete
-                                        </button>
+                                <div class="col-lg-6 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">Email</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
+                                    </label>
+                                    <input class="form-control form-control-solid" type="email" placeholder="Email" name="email" value="{{$data->email}}"/>
+                                </div>
+                                <div class="col-lg-6 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span>Reset Password</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Reset password (optional)"></i>
+                                    </label>
+                                    <input class="form-control form-control-solid" type="password" placeholder="reset new password" name="password" value=""/>
+                                </div>
+                                <div class="col-lg-6 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">Role</span>
+                                    </label>
+                                    <select name="current_team_id" data-control="select2"  data-placeholder="Pilih Role..." class="form-control form-control-solid">
+                                        <option value="{{$data->current_team_id}}" selected>{{$data->currentteam->name}}</option>
+                                        @foreach ($teams as $team)
+                                            <option value="{{$team->id}}">{{$team->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">Status</span>
+                                    </label>
+                                    <select name="active" data-control="select2" data-placeholder="Pilih Status..." class="form-control form-control-solid">
+                                        @if ($data->active == 1)
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">Non Active</option>
+                                        @else
+                                            <option value="1">Active</option>
+                                            <option value="0" selected>Non Active</option>
+                                        @endif
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 mb-5">
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span>Photo</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
+                                    </label>
+                                    <div class="my-3 text-center">
+                                        <img
+                                            src="{{ asset('assets/media/misc/spinner.gif') }}"
+                                            data-src="{{ asset($data->photo) }}"
+                                            class="lozad rounded mw-100 "
+                                            alt=""
+                                        />
                                     </div>
-                                @endisset
+                                    <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
+                                    @isset($data->profile_photo_path)
+                                        <div class="mt-1 text-end">
+                                            <button class="btn btn-danger btn-sm mt-2"
+                                                href="{{ route('delete-photo-user',$data->id) }}"
+                                                id="delete"
+                                                >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    @endisset
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -123,19 +123,64 @@
             element2.classList.add('active');
     </script>
     <script>
-        (() => {
-        'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
+        const form = document.getElementById('modal_form_form');
+        var validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {
+                    'name': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi nama!'
+                            }
+                        }
+                    },
+                    'email': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi dengan format email!'
+                            }
+                        }
+                    },
+                    'current_team_id': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan pilih Role!'
+                            }
+                        }
+                    },
+                    'active': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan pilih status!'
+                            }
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
                 }
-                form.classList.add('was-validated')
-                }, false)
-            })
-        })()
+            }
+        );
+        const submitButton = document.getElementById('modal_form_submit');
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+                    if (status == 'Valid') {
+                        submitButton.setAttribute('data-kt-indicator', 'on');
+                        submitButton.disabled = true;
+                        form.submit();
+                    }
+                });
+            }
+        });
     </script>
     <script>
         $('button#delete').on('click',function(e){

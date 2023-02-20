@@ -1,4 +1,4 @@
- <div class="modal fade" id="modal_add" tabindex="-1" aria-hidden="true">
+ <div class="modal fade" id="modal-form" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,20 +13,22 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form class="form needs-validation" action="{{ route('role-user.store') }}" method="post" id="modal_add_form" novalidate enctype="multipart/form-data">
+                <form id="modal_form_form" class="form" action="{{ route('role-user.store') }}" method="post" >
                     {{ csrf_field() }} {{ method_field('POST') }}
-                    <div class="row mb-7">
-                        <div class="col-12 mb-5">
-                            <label class="fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Name</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Role user tidak boleh sama"></i>
-                            </label>
-                            <input class="form-control form-control-solid"  oninput="this.value = this.value.toUpperCase()" placeholder="Enter a name" name="name" autofocus required/>
+                    <div class="d-flex flex-column fv-row">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span class="required">Name</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Role user tidak boleh sama"></i>
+                                </label>
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" />
+                            </div>
                         </div>
                     </div>
                     <div class="text-center pt-15">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button>
-                        <button type="submit" class="btn btn-primary" id="modal_form_submit" data-kt-permissions-modal-action="submit">
+                        <button type="submit" class="btn btn-primary" id="modal_form_submit">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -37,3 +39,7 @@
         </div>
     </div>
 </div>
+
+
+
+

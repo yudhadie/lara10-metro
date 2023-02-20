@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Team;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleUserController extends Controller
 {
@@ -26,7 +27,7 @@ class RoleUserController extends Controller
         $data = new Team();
         $data->name = $request->name;
         $data->personal_team = 1;
-        $data->user_id = 1;
+        $data->user_id = Auth::user()->id;
         $data->save();
 
         return redirect()->route('role-user.index')->with('success', 'Data Role berhasil ditambahkan');

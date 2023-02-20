@@ -110,20 +110,71 @@
         });
     </script>
     <script>
-        (() => {
-        'use strict'
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        console.log('no validated!')
+        const form = document.getElementById('modal_form_form');
+        var validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {
+                    'name': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi nama!'
+                            }
+                        }
+                    },
+                    'email': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi dengan format email!'
+                            }
+                        }
+                    },
+                    'password': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi password!'
+                            }
+                        }
+                    },
+                    'current_team_id': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan pilih Role!'
+                            }
+                        }
+                    },
+                    'active': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan pilih status!'
+                            }
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
+                }
+            }
+        );
+        const submitButton = document.getElementById('modal_form_submit');
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+                    if (status == 'Valid') {
+                        submitButton.setAttribute('data-kt-indicator', 'on');
+                        submitButton.disabled = true;
+                        form.submit();
                     }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
+                });
+            }
+        });
     </script>
 
 @endpush

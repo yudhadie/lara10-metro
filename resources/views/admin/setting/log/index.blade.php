@@ -10,8 +10,10 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>No</th>
-                                <th class="min-w-125px">Name</th>
-                                <th>Active</th>
+                                <th class="min-w-125px">Data</th>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Event</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -23,20 +25,10 @@
         </div>
     </div>
 
-    <form action="" method="post" id="deleteForm">
-        @csrf
-        @method("DELETE")
-        <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
-    </form>
-
-    @include('admin.setting.role.modal')
-
 @endsection
 
 @section('create')
-    <div class="d-flex align-items-center gap-2 gap-lg-3">
-        <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#modal-form">Create</a>
-    </div>
+
 @endsection
 
 @section('styles')
@@ -48,29 +40,30 @@
     <script>
         var element = document.getElementById('menu-setting');
             element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-role-user');
+        var element2 = document.getElementById('menu-setting-log-activity');
             element2.classList.add('active');
     </script>
     <script>
         "use strict";
         var KTDatatablesBasicBasic = function() {
-
         var initTable1 = function() {
             var table = $('#datatable');
             table.DataTable({
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data.role-user') }}',
+                ajax: '{{ route('data.log-activity') }}',
                 columns: [
                     {data:'DT_RowIndex', orderable: false, searchable: false},
-                    {data:'name'},
-                    {data:'active'},
+                    {data:'log_name'},
+                    {data:'subject_id'},
+                    {data:'user'},
+                    {data:'event'},
                     {data:'action', responsivePriority: -1,orderable: false, searchable: false},
                 ],
                 columnDefs: [
                     {
-                        targets: [0,2,3],
+                        targets: [0,2,3,4,5],
                         className: 'dt-center',
                     },
                 ],
@@ -89,7 +82,6 @@
         };
 
         return {
-            //main function to initiate the module
             init: function() {
                 initTable1();
             }
@@ -98,45 +90,6 @@
 
         jQuery(document).ready(function() {
         KTDatatablesBasicBasic.init();
-        });
-    </script>
-    <script>
-        const form = document.getElementById('modal_form_form');
-        var validator = FormValidation.formValidation(
-            form,
-            {
-                fields: {
-                    'name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan isi nama!'
-                            }
-                        }
-                    },
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
-        const submitButton = document.getElementById('modal_form_submit');
-        submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
-                        submitButton.disabled = true;
-                        form.submit();
-                    }
-                });
-            }
         });
     </script>
 
