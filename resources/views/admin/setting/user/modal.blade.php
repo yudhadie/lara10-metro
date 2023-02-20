@@ -21,9 +21,6 @@
                                 <span class="required">Name</span>
                             </label>
                             <input class="form-control form-control-solid" placeholder="Enter a name" name="name" autofocus required/>
-                            <div class="invalid-feedback">
-                                Silahkan isi nama!
-                            </div>
                         </div>
                         <div class="col-6 mb-5">
                             <label class="fs-6 fw-semibold form-label mb-2">
@@ -31,18 +28,12 @@
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Email tidak boleh sama"></i>
                             </label>
                             <input class="form-control form-control-solid" type="email" placeholder="Email" name="email" required/>
-                            <div class="invalid-feedback">
-                                Silahkan isi email!
-                            </div>
                         </div>
                         <div class="col-6 mb-5">
                             <label class="fs-6 fw-semibold form-label mb-2">
                                 <span class="required">Password</span>
                             </label>
                             <input class="form-control form-control-solid" type="password" placeholder="Password" name="password" required/>
-                            <div class="invalid-feedback">
-                                Silahkan isi password!
-                            </div>
                         </div>
                         <div class="col-6 mb-5">
                             <label class="fs-6 fw-semibold form-label mb-2">
@@ -54,9 +45,6 @@
                                     <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                Silahkan pilih role!
-                            </div>
                         </div>
                         <div class="col-6 mb-5">
                             <label class="fs-6 fw-semibold form-label mb-2">
@@ -66,9 +54,6 @@
                                 <option value="1">Active</option>
                                 <option value="0">Non Active</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Silahkan pilih status!
-                            </div>
                         </div>
                         <div class="col-12 mb-5">
                             <label class="fs-6 fw-semibold form-label mb-2">

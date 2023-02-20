@@ -112,26 +112,18 @@
     <script>
         (() => {
         'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
+            const forms = document.querySelectorAll('.needs-validation');
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        console.log('no validated!')
+                    }
+                    form.classList.add('was-validated')
                 }, false)
             })
         })()
-    </script>
-    <script>
-        // Submit button handler
-        const submitButton = document.getElementById('modal_form_submit');
-            submitButton.addEventListener('click', function (e) {
-            submitButton.setAttribute('data-kt-indicator', 'on');
-            submitButton.disabled = true;
-            modal_add_form.submit();
-        });
     </script>
 
 @endpush

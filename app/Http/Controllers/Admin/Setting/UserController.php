@@ -71,10 +71,10 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $data = User::FindOrFail($id);
-        $teams = Team::orderby('name','asc')->get();
+        $teams = Team::where('id','!=',$data->current_team_id)->orderby('name','asc')->get();
 
         return view('admin.setting.user.edit',[
-            'title' => 'Users',
+            'title' => 'Edit Users',
             'breadcrumbs' => Breadcrumbs::render('user.edit',$data),
             'teams' => $teams,
             'data' => $data,
@@ -86,7 +86,26 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'email' => 'required|unique:users,email,'.$id,
+        ]);
+
+        $user = User::find($id);
+        $photo = $user->profile_photo_path;
+
+        if ($request->hasFile('profile_photo_path')) {
+            $photo = $request->file('profile_photo_path')->store('uploads/user');
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'current_team_id' => $request->current_team_id,
+            'active' => $request->active,
+            'profile_photo_path' => $photo,
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Data user berhasil diupdate');
     }
 
     /**
