@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,11 +32,14 @@ Route::middleware([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     //Setting
+        //Role User
+        Route::resource('/setting/role-user', RoleUserController::class);
         //User
         Route::resource('/setting/user', UserController::class);
 
     //Datatables
         //Settings
+        Route::get('/setting/role-user-data', [DataController::class, 'roleuser'])->name('data.role-user');
         Route::get('/setting/user-data', [DataController::class, 'user'])->name('data.user');
 
     //Photo

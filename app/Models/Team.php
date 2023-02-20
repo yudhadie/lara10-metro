@@ -41,4 +41,14 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    protected $appends = [
+        'active',
+    ];
+
+    public function getActiveAttribute()
+    {
+        return $this->hasMany(User::class, 'current_team_id', 'id')->count();
+    }
+
 }

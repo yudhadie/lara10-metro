@@ -20,6 +20,16 @@ Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
     $trail->push('Setting','#');
 });
 
+    //Role User
+    Breadcrumbs::for('role-user', function (BreadcrumbTrail $trail) {
+        $trail->parent('setting');
+        $trail->push('Role User', route('role-user.index'));
+    });
+    Breadcrumbs::for('role-user.edit', function (BreadcrumbTrail $trail, $data) {
+        $trail->parent('role-user');
+        $trail->push($data->name);
+    });
+
     //User
     Breadcrumbs::for('user', function (BreadcrumbTrail $trail) {
         $trail->parent('setting');

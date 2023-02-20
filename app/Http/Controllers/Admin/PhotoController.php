@@ -21,6 +21,6 @@ class PhotoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('danger', 'Photo Profile berhasil di hapus');
+        return redirect()->back()->with('error','Photo Profile berhasil di hapus');
     }
 }

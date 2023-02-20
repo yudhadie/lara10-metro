@@ -3,3 +3,5 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 
 @stack('scripts')
+
+@include('admin.templates.partials.toastr')

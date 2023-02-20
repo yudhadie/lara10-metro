@@ -22,7 +22,7 @@
 									<div class="text-gray-500 fw-semibold fs-6">Dashboard Aplication</div>
 								</div>
 
-                                {{-- @include('admin.templates.partials.head-alert') --}}
+                                @include('admin.templates.partials.alert')
 
 								<div class="fv-row mb-8">
 									<input type="email" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" value="{{old('email')}}" autofocus/>

@@ -27,6 +27,13 @@
                             </div>
                             <div class="col-lg-6 mb-5">
                                 <label class="fs-6 fw-semibold form-label mb-2">
+                                    <span>Reset Password</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Reset password (optional)"></i>
+                                </label>
+                                <input class="form-control form-control-solid" type="password" placeholder="reset new password" name="password" value=""/>
+                            </div>
+                            <div class="col-lg-6 mb-5">
+                                <label class="fs-6 fw-semibold form-label mb-2">
                                     <span class="required">Role</span>
                                 </label>
                                 <select name="current_team_id" data-control="select2"  data-placeholder="Pilih Role..." class="form-control form-control-solid" required>

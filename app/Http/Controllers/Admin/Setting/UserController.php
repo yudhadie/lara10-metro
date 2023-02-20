@@ -120,6 +120,13 @@ class UserController extends Controller
             'profile_photo_path' => $photo,
         ]);
 
+        if ($request->password != null) {
+            $data->password = bcrypt($request->password);
+            $data->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
         return redirect()->route('user.edit',$data->id)->with('success', 'Data user berhasil diupdate');
     }
 
