@@ -61,6 +61,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'profile_photo_url',
+        'photo',
     ];
+
+    public function getPhotoAttribute()
+    {
+        if ($this->profile_photo_path == null) {
+            $photo = $this->profile_photo_url;
+        } else {
+            $photo = $this->profile_photo_path;
+        }
+        return $photo;
+    }
 }

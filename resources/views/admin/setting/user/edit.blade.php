@@ -58,7 +58,25 @@
                                     <span>Photo</span>
                                     <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
                                 </label>
-                                <input class="form-control form-control-solid" type="file" placeholder="Photo" name="photo"/>
+                                <div class="my-3 text-center">
+                                    <img
+                                        src="{{ asset('assets/media/misc/spinner.gif') }}"
+                                        data-src="{{ asset($data->photo) }}"
+                                        class="lozad rounded mw-100 "
+                                        alt=""
+                                    />
+                                </div>
+                                <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
+                                @isset($data->profile_photo_path)
+                                    <div class="mt-1 text-end">
+                                        <button class="btn btn-danger btn-sm mt-2"
+                                            href="{{ route('delete-photo-user',$data->id) }}"
+                                            id="delete"
+                                            >
+                                            Delete
+                                        </button>
+                                    </div>
+                                @endisset
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -74,6 +92,12 @@
             </div>
         </div>
     </div>
+
+    <form action="" method="post" id="deletePhoto">
+        @csrf
+        @method("PUT")
+        <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
+    </form>
 
 
 @endsection
@@ -105,6 +129,31 @@
                 }, false)
             })
         })()
+    </script>
+    <script>
+        $('button#delete').on('click',function(e){
+            e.preventDefault();
+            var href = $(this).attr('href');
+            Swal.fire({
+                title: 'Apakah kamu yakin hapus data ini?',
+                text: "Data yang sudah di hapus tidak bisa di Kembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus saja!'
+                }).then((result) => {
+                    if (result.value) {
+                        document.getElementById('deletePhoto').action = href;
+                        document.getElementById('deletePhoto').submit();
+                        Swal.fire(
+                        'Terhapus!!',
+                        'Data kamu berhasil di hapus',
+                        'success'
+                    )
+                }
+            })
+        })
     </script>
 
 @endpush

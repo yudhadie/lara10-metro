@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -52,6 +53,16 @@ class UserController extends Controller
         $data->active = $request->active;
         $data->save();
 
+        if ($request->hasFile('photo')) {
+            $location = 'uploads/user/'.$data->id.'.jpg';
+            Image::make($request->file('photo'))->resize(1920, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location);
+            $data->update([
+                'profile_photo_path' => $location,
+            ]);
+        }
+
         return redirect()->route('user.index')->with('success', 'Data user berhasil ditambahkan');
 
 
@@ -90,14 +101,18 @@ class UserController extends Controller
             'email' => 'required|unique:users,email,'.$id,
         ]);
 
-        $user = User::find($id);
-        $photo = $user->profile_photo_path;
+        $data = User::find($id);
+        $photo = $data->profile_photo_path;
 
-        if ($request->hasFile('profile_photo_path')) {
-            $photo = $request->file('profile_photo_path')->store('uploads/user');
+        if ($request->hasFile('photo')) {
+            $location = 'uploads/user/'.$data->id.'.jpg';
+            Image::make($request->file('photo'))->resize(1920, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location);
+            $photo = $location;
         }
 
-        $user->update([
+        $data->update([
             'name' => $request->name,
             'email' => $request->email,
             'current_team_id' => $request->current_team_id,
@@ -105,7 +120,7 @@ class UserController extends Controller
             'profile_photo_path' => $photo,
         ]);
 
-        return redirect()->route('user.index')->with('success', 'Data user berhasil diupdate');
+        return redirect()->route('user.edit',$data->id)->with('success', 'Data user berhasil diupdate');
     }
 
     /**

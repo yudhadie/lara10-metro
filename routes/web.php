@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\Setting\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,9 @@ Route::middleware([
     //Datatables
         //Settings
         Route::get('/setting/user-data', [DataController::class, 'user'])->name('data.user');
+
+    //Photo
+        //Delete
+        Route::put('/photo/delete-user-profile/{id}', [PhotoController::class, 'deleteuser'])->name('delete-photo-user');
 
 });

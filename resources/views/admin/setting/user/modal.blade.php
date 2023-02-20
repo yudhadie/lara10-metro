@@ -60,7 +60,7 @@
                                 <span>Photo</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
                             </label>
-                            <input class="form-control form-control-solid" type="file" placeholder="Photo" name="photo"/>
+                            <input type="file" class="form-control form-control-solid" name="photo" placeholder="Photo" accept=".jpg,.jpeg,.png"/>
                         </div>
                     </div>
                     <div class="text-center pt-15">
