@@ -131,11 +131,13 @@
                 <td class="center quarter">{{ Carbon\Carbon::now()->format('d F Y')  }}</td>
             </tr>
             <tr class="noborder">
-                <td class="ttd"></td>
                 <td></td>
+                <td class="center">
+                    <img src="data:image/png;base64, {{base64_encode(QrCode::size(60)->generate($ttd))}}">
+                </td>
             </tr>
             <tr class="noborder">
-                <td class="bold"></td>
+                <td></td>
                 <td class="center bold">{{Auth::user()->name}}</td>
             </tr>
         </table>
