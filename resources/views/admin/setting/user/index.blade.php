@@ -37,6 +37,7 @@
 
 @section('create')
     <div class="d-flex align-items-center gap-2 gap-lg-3">
+        <a href="{{ route('report.user') }}" target="_blank" class="btn btn-sm fw-bold btn-info">Print</a>
         <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#modal_add">Create</a>
     </div>
 @endsection

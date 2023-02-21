@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\Setting\LogActivityController;
 use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
@@ -40,6 +41,10 @@ Route::middleware([
         Route::resource('/setting/role-user', RoleUserController::class);
         //User
         Route::resource('/setting/user', UserController::class);
+
+    //Report
+        //Users PDF
+        Route::get('/report/user', [ReportController::class, 'user'])->name('report.user');
 
     //Datatables
         //Settings
