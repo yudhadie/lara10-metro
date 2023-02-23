@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\Setting\LogActivityController;
 use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
+use App\Http\Controllers\ErrorPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Route::get('/', function () {
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified','active',
     ])->prefix('dashboard')->group(function () {
 
     //Dashboard
@@ -57,3 +58,6 @@ Route::middleware([
         Route::put('/photo/delete-user-profile/{id}', [PhotoController::class, 'deleteuser'])->name('delete-photo-user');
 
 });
+
+//Error
+Route::get('/user-disabled', [ErrorPageController::class, 'active'])->name('error.active');
