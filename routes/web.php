@@ -33,6 +33,7 @@ Route::middleware([
 
     //Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
     //Setting
         //Log Activity

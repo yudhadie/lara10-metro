@@ -5,10 +5,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-xxl">
             <div class="card card-flush">
-                <div class="card-header">
-                    <h3 class="card-title">User Detail</h3>
-                </div>
-                <div class="card-body pt-0">
+                <div class="card-body pt-9">
                     <form class="form mt-7" action="{{ route('role-user.update',$data) }}" method="post" id="modal_form_form">
                         {{ csrf_field() }} {{ method_field('PUT') }}
                         <div class="d-flex flex-column fv-row">
@@ -44,11 +41,9 @@
 
 @push('scripts')
 
-    <script>
-        var element = document.getElementById('menu-setting');
-            element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-role-user');
-            element2.classList.add('active');
+     <script>
+        document.getElementById('menu-setting').classList.add('show');
+        document.getElementById('menu-setting-role-user').classList.add('active');
     </script>
     <script>
         const form = document.getElementById('modal_form_form');

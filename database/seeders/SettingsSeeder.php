@@ -31,6 +31,7 @@ class SettingsSeeder extends Seeder
         //User
         User::create([
             'id' => '1',
+            'username' => 'admin',
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin123'),
@@ -39,6 +40,7 @@ class SettingsSeeder extends Seeder
 
         User::create([
             'id' => '2',
+            'username' => 'user',
             'name' => 'User',
             'email' => 'user@user.com',
             'password' => bcrypt('user123'),

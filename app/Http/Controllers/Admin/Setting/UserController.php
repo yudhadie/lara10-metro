@@ -9,6 +9,7 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -76,6 +77,17 @@ class UserController extends Controller
         //
     }
 
+    public function profile()
+    {
+
+        return view('admin.setting.user.profile',[
+            'title' => 'Profile Detail',
+            'breadcrumbs' => Breadcrumbs::render('profile'),
+            'data' => Auth::user(),
+        ]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -115,10 +127,15 @@ class UserController extends Controller
         $data->update([
             'name' => $request->name,
             'email' => $request->email,
-            'current_team_id' => $request->current_team_id,
-            'active' => $request->active,
             'profile_photo_path' => $photo,
         ]);
+
+        if ($request->current_team_id != null) {
+            $data->update([
+                'current_team_id' => $request->current_team_id,
+                'active' => $request->active,
+            ]);
+        }
 
         if ($request->password != null) {
             $data->password = bcrypt($request->password);
@@ -127,7 +144,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('user.edit',$data->id)->with('success', 'Data user berhasil diupdate');
+        return redirect()->back()->with('success', 'Data user berhasil diupdate');
     }
 
     /**
@@ -145,4 +162,5 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('error', 'Data User berhasil dihapus');
     }
+
 }

@@ -8,11 +8,11 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
      $trail->push('Dashboard', route('dashboard'));
 });
 
-//Profile
-// Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
-//     $trail->parent('dashboard');
-//     $trail->push('Profile');
-// });
+// Profile
+Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile');
+});
 
 //Setting
 Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {

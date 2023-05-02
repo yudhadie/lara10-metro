@@ -5,9 +5,6 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-xxl">
             <div class="card card-flush">
-                {{-- <div class="card-header">
-                    <h3 class="card-title">User Detail</h3>
-                </div> --}}
                 <div class="card-body pt-9">
                     <form class="form mt-7" action="{{ route('user.update',$data) }}" method="post" id="modal_form_form" novalidate enctype="multipart/form-data">
                         {{ csrf_field() }} {{ method_field('PUT') }}
@@ -41,32 +38,6 @@
                                 </div>
                                 <div class="col-lg-6 mb-5">
                                     <label class="fs-6 fw-semibold form-label mb-2">
-                                        <span class="required">Role</span>
-                                    </label>
-                                    <select name="current_team_id" data-control="select2"  data-placeholder="Pilih Role..." class="form-control form-control-solid">
-                                        <option value="{{$data->current_team_id}}" selected>{{$data->currentteam->name}}</option>
-                                        @foreach ($teams as $team)
-                                            <option value="{{$team->id}}">{{$team->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 mb-5">
-                                    <label class="fs-6 fw-semibold form-label mb-2">
-                                        <span class="required">Status</span>
-                                    </label>
-                                    <select name="active" data-control="select2" data-placeholder="Pilih Status..." class="form-control form-control-solid">
-                                        @if ($data->active == 1)
-                                            <option value="1" selected>Active</option>
-                                            <option value="0">Non Active</option>
-                                        @else
-                                            <option value="1">Active</option>
-                                            <option value="0" selected>Non Active</option>
-                                        @endif
-
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 mb-5">
-                                    <label class="fs-6 fw-semibold form-label mb-2">
                                         <span>Photo</span>
                                         <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="Optional"></i>
                                     </label>
@@ -93,7 +64,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                            <a href="{{ route('user.index') }}" class="btn btn-light me-3">Back</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-light me-3">Back</a>
                             <button type="submit" class="btn btn-primary" id="modal_form_submit">
                                 <span class="indicator-label">Save</span>
                                 <span class="indicator-progress">Please wait...
@@ -122,10 +93,9 @@
 
 @push('scripts')
 
-    <script>
-        document.getElementById('menu-setting').classList.add('show');
-        document.getElementById('menu-setting-user').classList.add('active');
-    </script>
+<script>
+    document.getElementById('menu-dashboard').classList.add('active');
+</script>
     <script>
         const form = document.getElementById('modal_form_form');
         var validator = FormValidation.formValidation(
@@ -143,20 +113,6 @@
                         validators: {
                             notEmpty: {
                                 message: 'Silahkan isi dengan format email!'
-                            }
-                        }
-                    },
-                    'current_team_id': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan pilih Role!'
-                            }
-                        }
-                    },
-                    'active': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan pilih status!'
                             }
                         }
                     },

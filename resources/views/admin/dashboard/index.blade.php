@@ -12,8 +12,7 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu-dashboard');
-            element.classList.add('active');
+        document.getElementById('menu-dashboard').classList.add('active');
     </script>
 
 @endpush

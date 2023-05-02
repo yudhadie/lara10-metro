@@ -63,10 +63,8 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu-setting');
-            element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-log-activity');
-            element2.classList.add('active');
+        document.getElementById('menu-setting').classList.add('show');
+        document.getElementById('menu-setting-log-activity').classList.add('active');
     </script>
 
 @endpush

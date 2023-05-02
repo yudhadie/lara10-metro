@@ -46,41 +46,43 @@
                         <span class="menu-title">Report</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="menu-setting">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="bi bi-gear fs-3"></i>
+                @if (Auth::user()->current_team_id == 1)
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="menu-setting">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="bi bi-gear fs-3"></i>
+                            </span>
+                            <span class="menu-title">Settings</span>
+                            <span class="menu-arrow"></span>
                         </span>
-                        <span class="menu-title">Settings</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
-                        <div class="menu-item">
-                            <a class="menu-link" id="menu-setting-log-activity" href="{{route('log-activity.index')}}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Activity</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" id="menu-setting-role-user" href="{{route('role-user.index')}}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Role Users</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" id="menu-setting-user" href="{{route('user.index')}}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Users</span>
-                            </a>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" id="menu-setting-log-activity" href="{{route('log-activity.index')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Activity</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" id="menu-setting-role-user" href="{{route('role-user.index')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Role Users</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" id="menu-setting-user" href="{{route('user.index')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Users</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

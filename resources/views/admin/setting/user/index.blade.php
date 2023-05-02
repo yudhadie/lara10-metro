@@ -49,10 +49,8 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu-setting');
-            element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-user');
-            element2.classList.add('active');
+        document.getElementById('menu-setting').classList.add('show');
+        document.getElementById('menu-setting-user').classList.add('active');
     </script>
     <script>
         "use strict";
