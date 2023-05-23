@@ -50,7 +50,7 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data.log-activity') }}',
+                ajax: '{{ route('log-activity.data') }}',
                 columns: [
                     {data:'DT_RowIndex', orderable: false, searchable: false},
                     {data:'log_name'},

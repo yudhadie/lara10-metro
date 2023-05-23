@@ -62,7 +62,7 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data.user') }}',
+                ajax: '{{ route('user.data') }}',
                 columns: [
                     {data:'DT_RowIndex', orderable: false, searchable: false},
                     {data:'name'},

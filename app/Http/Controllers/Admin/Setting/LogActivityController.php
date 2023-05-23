@@ -27,4 +27,27 @@ class LogActivityController extends Controller
             'data' => $data,
         ]);
     }
+
+    public function data()
+    {
+        $data = LogActivity::latest();
+
+        return datatables()->of($data)
+        ->addColumn('action', 'admin.setting.log.action')
+        ->addIndexColumn()
+        ->addColumn('user', function($data){
+            return $data->user->name ?? 'deleted';
+        })
+        ->editColumn('event', function($data){
+            if ($data->event == 'created') {
+                return'<span class="text-success">created</span>';
+            } elseif ($data->event == 'updated') {
+                return'<span class="text-warning">updated</span>';
+            } elseif ($data->event == 'deleted') {
+                return'<span class="text-danger">deleted</span>';
+            }
+        })
+        ->rawColumns(['action','event'])
+        ->toJson();
+    }
 }

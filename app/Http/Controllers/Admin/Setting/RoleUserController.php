@@ -66,4 +66,15 @@ class RoleUserController extends Controller
 
         return redirect()->route('role-user.index')->with('error', 'Data Role berhasil dihapus');
     }
+
+    public function data()
+    {
+        $data = Team::orderBy('name','asc');
+
+        return datatables()->of($data)
+        ->addColumn('action', 'admin.setting.role.action')
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
 }

@@ -163,4 +163,25 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('error', 'Data User berhasil dihapus');
     }
 
+    public function data()
+    {
+        $data = User::orderBy('name','asc')->get();
+
+        return datatables()->of($data)
+        ->addColumn('action', 'admin.setting.user.action')
+        ->addIndexColumn()
+        ->addColumn('role', function($data){
+            return $data->currentTeam->name;
+        })
+        ->addColumn('status', function($data){
+            if ($data->active == 1) {
+                return'<span class="text-success">Active</span>';
+            }else {
+                return'<span class="text-danger">Inactive</span>';
+            }
+        })
+        ->rawColumns(['action','status'])
+        ->toJson();
+    }
+
 }

@@ -39,11 +39,11 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link" id="menu-content"  href="{{route('content.index')}}">
                         <span class="menu-icon">
-                            <i class="bi bi-journal-text fs-3"></i>
+                            <i class="bi bi-newspaper fs-3"></i>
                         </span>
-                        <span class="menu-title">Report</span>
+                        <span class="menu-title">Content</span>
                     </a>
                 </div>
                 @if (Auth::user()->current_team_id == 1)

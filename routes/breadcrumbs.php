@@ -14,6 +14,12 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
     $trail->push('Profile');
 });
 
+//Content
+Breadcrumbs::for('content', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Content', route('content.index'));
+});
+
 //Setting
 Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

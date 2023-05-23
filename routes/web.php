@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
@@ -35,24 +36,25 @@ Route::middleware([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
+    //Content
+    Route::resource('/content', ContentController::class);
+    Route::get('/content-data', [ContentController::class, 'data'])->name('content.data');
+
     //Setting
         //Log Activity
         Route::get('/setting/log-activity', [LogActivityController::class, 'index'])->name('log-activity.index');
         Route::get('/setting/log-activity/{id}', [LogActivityController::class, 'show'])->name('log-activity.show');
+        Route::get('/setting/log-activity-data', [LogActivityController::class, 'data'])->name('log-activity.data');
         //Role User
         Route::resource('/setting/role-user', RoleUserController::class);
+        Route::get('/setting/role-user-data', [RoleUserController::class, 'data'])->name('role-user.data');
         //User
         Route::resource('/setting/user', UserController::class);
+        Route::get('/setting/user-data', [UserController::class, 'data'])->name('user.data');
 
     //Report
         //Users PDF
         Route::get('/report/user', [ReportController::class, 'user'])->name('report.user');
-
-    //Datatables
-        //Settings
-        Route::get('/setting/log-activity-data', [DataController::class, 'log'])->name('data.log-activity');
-        Route::get('/setting/role-user-data', [DataController::class, 'roleuser'])->name('data.role-user');
-        Route::get('/setting/user-data', [DataController::class, 'user'])->name('data.user');
 
     //Photo
         //Delete
