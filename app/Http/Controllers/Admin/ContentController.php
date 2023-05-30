@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+use App\Models\ContentCategory;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
 
@@ -11,9 +12,12 @@ class ContentController extends Controller
 {
     public function index()
     {
+        $category = ContentCategory::orderby('name')->get();
+
         return view('admin.content.index',[
             'title' => 'Content',
             'breadcrumbs' => Breadcrumbs::render('content'),
+            'categorys' => $category,
         ]);
     }
 
@@ -25,6 +29,7 @@ class ContentController extends Controller
 
         $data = new Content();
         $data->title = $request->title;
+        $data->content_category_id = $request->content_category_id;
         $data->desc = $request->desc;
         $data->save();
 
@@ -52,6 +57,7 @@ class ContentController extends Controller
         $data = Content::find($id);
         $data->update([
             'title' => $request->title,
+            'content_category_id' => $request->content_category_id,
             'desc' => $request->desc,
         ]);
 
@@ -68,10 +74,15 @@ class ContentController extends Controller
 
     public function data()
     {
-        $data = Content::latest()->get();
+        // $data = Content::onlyTrashed();
+        // $data = Content::withTrashed();
+        $data = Content::all();
 
         return datatables()->of($data)
         ->addColumn('action', 'admin.content.action')
+        ->addColumn('category', function($data){
+            return $data->content_category->name;
+        })
         ->addIndexColumn()
         ->rawColumns(['action'])
         ->toJson();

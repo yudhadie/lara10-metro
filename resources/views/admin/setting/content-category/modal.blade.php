@@ -13,33 +13,16 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="modal_form_form" class="form" action="{{ route('content.store') }}" method="post" >
+                <form id="modal_form_form" class="form" action="{{ route('content-category.store') }}" method="post" >
                     {{ csrf_field() }} {{ method_field('POST') }}
                     <div class="d-flex flex-column fv-row">
                         <div class="row">
                             <div class="col-12 mb-5">
                                 <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Judul</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="judul tidak boleh sama"></i>
+                                    <span class="required">Name</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="data tidak boleh sama"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" placeholder="" name="title" />
-                            </div>
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Kategori</span>
-                                </label>
-                                <select name="content_category_id" data-control="select2" data-placeholder="Pilih Data..." data-dropdown-parent="#modal-form" class="form-select form-select-solid form-select-lg fw-bold">
-                                    <option value=""></option>
-                                    @foreach ($categorys as $data)
-                                        <option value="{{$data->id}}">{{$data->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Deskripsi</span>
-                                </label>
-                                <textarea class="form-control form-control-solid" name="desc" placeholder="isi Content" data-kt-autosize="true"></textarea>
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="name" />
                             </div>
                         </div>
                     </div>
@@ -78,30 +61,10 @@
                         <div class="row">
                             <div class="col-12 mb-5">
                                 <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Judul</span>
-                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="judul tidak boleh sama"></i>
+                                    <span class="required">Name</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="data tidak boleh sama"></i>
                                 </label>
-                                <input type="text" class="form-control form-control-solid" id="title" name="title" required/>
-                            </div>
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Kategori</span>
-                                </label>
-                                <select name="content_category_id" data-control="select2" id="category" data-placeholder="Pilih Data..." data-dropdown-parent="#modal-update" class="form-select form-select-solid form-select-lg fw-bold">
-                                    <option value=""></option>
-                                    @foreach ($categorys as $data)
-                                        <option value="{{$data->id}}">{{$data->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-12 mb-5">
-                                <label class="fs-6 fw-semibold form-label mb-2">
-                                    <span class="required">Deskripsi</span>
-                                </label>
-                                <textarea class="form-control form-control-solid" name="desc" id="desc" placeholder="isi Content" data-kt-autosize="true" required></textarea>
-                            </div>
-                            <div class="col-12 mb-5 text-end">
-                                <button class="btn btn-sm btn-danger" id="delete">Delete</button>
+                                <input type="text" class="form-control form-control-solid" id="name" name="name" required/>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\Setting\ContentCategoryController;
 use App\Http\Controllers\Admin\Setting\LogActivityController;
 use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
@@ -41,10 +42,13 @@ Route::middleware([
     Route::get('/content-data', [ContentController::class, 'data'])->name('content.data');
 
     //Setting
-        //Log Activity
+        //Activity
         Route::get('/setting/log-activity', [LogActivityController::class, 'index'])->name('log-activity.index');
         Route::get('/setting/log-activity/{id}', [LogActivityController::class, 'show'])->name('log-activity.show');
         Route::get('/setting/log-activity-data', [LogActivityController::class, 'data'])->name('log-activity.data');
+        //Content Category
+        Route::resource('/setting/content-category', ContentCategoryController::class);
+        Route::get('/setting/content-category-data', [ContentCategoryController::class, 'data'])->name('content-category.data');
         //Role User
         Route::resource('/setting/role-user', RoleUserController::class);
         Route::get('/setting/role-user-data', [RoleUserController::class, 'data'])->name('role-user.data');

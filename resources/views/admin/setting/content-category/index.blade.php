@@ -11,7 +11,6 @@
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th>No</th>
                                 <th class="min-w-125px">Name</th>
-                                <th>Category</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -29,7 +28,7 @@
         <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
     </form>
 
-    @include('admin.content.modal')
+    @include('admin.setting.content-category.modal')
 
 @endsection
 
@@ -46,7 +45,8 @@
 @push('scripts')
 
     <script>
-        document.getElementById('menu-content').classList.add('active');
+        document.getElementById('menu-setting').classList.add('show');
+        document.getElementById('menu-setting-content-category').classList.add('active');
     </script>
     <script>
         "use strict";
@@ -58,16 +58,15 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('content.data') }}',
+                ajax: '{{ route('content-category.data') }}',
                 columns: [
                     {data:'DT_RowIndex', orderable: false, searchable: false},
-                    {data:'title'},
-                    {data:'category'},
+                    {data:'name'},
                     {data:'action', responsivePriority: -1,orderable: false, searchable: false},
                 ],
                 columnDefs: [
                     {
-                        targets: [0,2,3],
+                        targets: [0,2],
                         className: 'dt-center',
                     },
                 ],
@@ -101,27 +100,23 @@
         $('body').on('click', '#btn-show', function () {
             let data_id = $(this).data('id');
             $.ajax({
-                url: "{{route('content.index')}}" + '/' + data_id,
+                url: "{{route('content-category.index')}}" + '/' + data_id,
                 type: "GET",
                 cache: false,
                 success:function(response){
                     $('#data_id').val(response.data.id);
-                    $('#title').val(response.data.title);
-                    $('#category').val(response.data.content_category_id);
-                    $('#desc').val(response.data.desc);
+                    $('#name').val(response.data.name);
                     // $('#modal_update').val(response.data.id);
                     $('#modal_update').val(response.data.id)
                     $('#modal-show').modal('show');
                 }
             });
-            document.getElementById("modal_update").action = "{{route('content.index')}}" + '/' + data_id;
+            document.getElementById("modal_update").action = "{{route('content-category.index')}}" + '/' + data_id;
         });
     </script>
     <script>
-        $('button#delete').on('click',function(e){
-            e.preventDefault();
-            // var href = $(this).attr('href');
-            var id = document.getElementById('data_id').value;
+        $('body').on('click', '#btn-delete', function () {
+            let data_id = $(this).data('id');
             Swal.fire({
                 title: 'Apakah kamu yakin hapus data ini?',
                 text: "Data yang sudah di hapus tidak bisa di Kembalikan!",
@@ -132,7 +127,7 @@
                 confirmButtonText: 'Ya, Hapus saja!'
                 }).then((result) => {
                     if (result.value) {
-                        document.getElementById('deleteForm').action = "{{route('content.index')}}" + '/' + id;
+                        document.getElementById('deleteForm').action = "{{route('content-category.index')}}" + '/' + data_id;
                         document.getElementById('deleteForm').submit();
                         Swal.fire(
                         'Terhapus!!',
@@ -141,7 +136,7 @@
                     )
                 }
             })
-        })
+        });
     </script>
      <script>
         const form = document.getElementById('modal_form_form');
@@ -149,24 +144,10 @@
             form,
             {
                 fields: {
-                    'title': {
+                    'name': {
                         validators: {
                             notEmpty: {
-                                message: 'Silahkan isi judul!'
-                            }
-                        }
-                    },
-                    'content_category_id': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan pilih kategori!'
-                            }
-                        }
-                    },
-                    'desc': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan isi deskripsi!'
+                                message: 'Silahkan isi nama!'
                             }
                         }
                     },

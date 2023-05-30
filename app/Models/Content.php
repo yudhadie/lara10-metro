@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Content extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     use LogsActivity;
 
@@ -23,4 +25,9 @@ class Content extends Model
 
     protected $guarded = [];
     protected $table = 'content';
+
+    public function content_category()
+    {
+        return $this->belongsTo(ContentCategory::class);
+    }
 }

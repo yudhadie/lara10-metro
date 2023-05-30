@@ -65,6 +65,14 @@
                                 </a>
                             </div>
                             <div class="menu-item">
+                                <a class="menu-link" id="menu-setting-content-category" href="{{route('content-category.index')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Category</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
                                 <a class="menu-link" id="menu-setting-role-user" href="{{route('role-user.index')}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>

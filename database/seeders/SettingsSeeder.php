@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ContentCategory;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,7 +38,6 @@ class SettingsSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'current_team_id' => 1,
         ]);
-
         User::create([
             'id' => '2',
             'username' => 'user',
@@ -45,6 +45,14 @@ class SettingsSeeder extends Seeder
             'email' => 'user@user.com',
             'password' => bcrypt('user123'),
             'current_team_id' => 2,
+        ]);
+
+        //Team
+        ContentCategory::create([
+            'name' => 'Kegiatan',
+        ]);
+        ContentCategory::create([
+            'name' => 'Informasi',
         ]);
     }
 }

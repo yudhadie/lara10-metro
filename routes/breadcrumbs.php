@@ -36,6 +36,12 @@ Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
         $trail->push($data->id);
     });
 
+    //Content Category
+     Breadcrumbs::for('content-category', function (BreadcrumbTrail $trail) {
+        $trail->parent('setting');
+        $trail->push('Content Category', route('content-category.index'));
+    });
+
     //Role User
     Breadcrumbs::for('role-user', function (BreadcrumbTrail $trail) {
         $trail->parent('setting');
