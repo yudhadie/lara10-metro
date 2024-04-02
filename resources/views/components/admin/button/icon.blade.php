@@ -7,7 +7,7 @@
         <i class="bi bi-pencil-square"></i>
     </a>
 @elseif ($type == 'delete')
-    <button class="btn btn-icon btn-active-light-danger w-30px h-30px me-3" id="delete" title="Delete" {{$attributes}}>
+    <button class="btn btn-icon btn-active-light-danger w-30px h-30px me-3" {{$attributes}}>
         <i class="bi bi-trash3-fill"></i>
     </button>
 @endif

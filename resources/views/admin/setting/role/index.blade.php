@@ -40,7 +40,7 @@
 
     <x-admin.menu.show menu="menu-setting"/>
     <x-admin.menu.active menu="menu-setting-role"/>
-
+    <x-admin.alert.delete/>
     <x-admin.script.table>
         ajax: '{{ route('role.data') }}',
         columns: [

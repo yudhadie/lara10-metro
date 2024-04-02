@@ -1,6 +1,6 @@
 <script>
-    $('button#delete').on('click',function(e){
-        e.preventDefault();
+    $('body').on('click', '#btn-delete', function () {
+        // let data_id = $(this).data('id');
         var href = $(this).attr('href');
         Swal.fire({
             title: 'Apakah kamu yakin hapus data ini?',
@@ -21,5 +21,5 @@
                 )
             }
         })
-    })
+    });
 </script>
