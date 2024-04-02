@@ -63,4 +63,9 @@ class Team extends JetstreamTeam
         return $this->hasMany(User::class, 'current_team_id', 'id')->count();
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'current_team_id', 'id');
+    }
+
 }

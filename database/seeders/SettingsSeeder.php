@@ -47,12 +47,5 @@ class SettingsSeeder extends Seeder
             'current_team_id' => 2,
         ]);
 
-        //Team
-        ContentCategory::create([
-            'name' => 'Kegiatan',
-        ]);
-        ContentCategory::create([
-            'name' => 'Informasi',
-        ]);
     }
 }

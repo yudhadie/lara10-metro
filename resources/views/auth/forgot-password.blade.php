@@ -7,7 +7,7 @@
 				<div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
 					<div class="d-flex flex-center flex-lg-start flex-column">
 						<a href="#" class="mb-7">
-							<img alt="Logo" src="{{asset('assets/media/logos/default-dark.svg')}}" />
+							<img alt="Logo" src="{{asset('assets/media/logos/logo-white.png')}}" />
 						</a>
 						<h2 class="text-white fw-normal m-0">Branding tools designed for your business</h2>
 					</div>

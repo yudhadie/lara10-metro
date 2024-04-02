@@ -46,12 +46,12 @@ class UserController extends Controller
             'email' => 'required|unique:users|max:255',
         ]);
 
-        $data = new User();
+        $data =  new User();
         $data->name = $request->name;
+        $data->username = $request->username;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $data->current_team_id = $request->current_team_id;
-        $data->active = $request->active;
         $data->save();
 
         if ($request->hasFile('photo')) {
@@ -161,27 +161,6 @@ class UserController extends Controller
         $data->delete();
 
         return redirect()->route('user.index')->with('error', 'Data User berhasil dihapus');
-    }
-
-    public function data()
-    {
-        $data = User::orderBy('name','asc')->get();
-
-        return datatables()->of($data)
-        ->addColumn('action', 'admin.setting.user.action')
-        ->addIndexColumn()
-        ->addColumn('role', function($data){
-            return $data->currentTeam->name;
-        })
-        ->addColumn('status', function($data){
-            if ($data->active == 1) {
-                return'<span class="text-success">Active</span>';
-            }else {
-                return'<span class="text-danger">Inactive</span>';
-            }
-        })
-        ->rawColumns(['action','status'])
-        ->toJson();
     }
 
 }

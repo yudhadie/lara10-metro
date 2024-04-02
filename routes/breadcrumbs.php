@@ -14,41 +14,19 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
     $trail->push('Profile');
 });
 
-//Content
-Breadcrumbs::for('content', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Content', route('content.index'));
-});
-
 //Setting
 Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Setting','#');
 });
 
-    //Activity
-    Breadcrumbs::for('log-activity', function (BreadcrumbTrail $trail) {
-        $trail->parent('setting');
-        $trail->push('Activity Log', route('log-activity.index'));
-    });
-    Breadcrumbs::for('log-activity.show', function (BreadcrumbTrail $trail, $data) {
-        $trail->parent('log-activity');
-        $trail->push($data->id);
-    });
-
-    //Content Category
-     Breadcrumbs::for('content-category', function (BreadcrumbTrail $trail) {
-        $trail->parent('setting');
-        $trail->push('Content Category', route('content-category.index'));
-    });
-
     //Role User
-    Breadcrumbs::for('role-user', function (BreadcrumbTrail $trail) {
+    Breadcrumbs::for('role', function (BreadcrumbTrail $trail) {
         $trail->parent('setting');
-        $trail->push('Role User', route('role-user.index'));
+        $trail->push('Role User', route('role.index'));
     });
     Breadcrumbs::for('role-user.edit', function (BreadcrumbTrail $trail, $data) {
-        $trail->parent('role-user');
+        $trail->parent('role');
         $trail->push($data->name);
     });
 
@@ -61,3 +39,14 @@ Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
         $trail->parent('user');
         $trail->push($data->name);
     });
+
+//Information
+//Activity
+Breadcrumbs::for('log-activity', function (BreadcrumbTrail $trail) {
+    $trail->parent('setting');
+    $trail->push('Activity Log', route('log-activity.index'));
+});
+Breadcrumbs::for('log-activity.show', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('log-activity');
+    $trail->push($data->id);
+});

@@ -24,7 +24,7 @@ return [
     */
 
     // 'view' => 'breadcrumbs::bootstrap5',
-    'view' => 'components.breadcrumbs',
+    'view' => 'vendor.breadcrumbs.custom',
 
     /*
     |--------------------------------------------------------------------------

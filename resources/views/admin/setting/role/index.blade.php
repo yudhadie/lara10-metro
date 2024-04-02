@@ -2,139 +2,92 @@
 
 @section('content')
 
-    <div id="kt_app_content" class="app-content flex-column-fluid">
-        <div id="kt_app_content_container" class="app-container container-xxl">
-            <div class="card card-flush">
-                <div class="card-body pt-0 mt-7">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="datatable">
-                        <thead>
-                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                <th>No</th>
-                                <th class="min-w-125px">Name</th>
-                                <th>Active</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-admin.card.default>
+        <x-admin.content.table-api>
+            <thead>
+                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                    <th>No</th>
+                    <th class="min-w-125px">Name</th>
+                    <th>Use</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </x-admin.content.table-api>
+    </x-admin.card.default>
 
-    <form action="" method="post" id="deleteForm">
-        @csrf
-        @method("DELETE")
-        <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
-    </form>
+    <x-admin.modal.create :title="$title" action="{{ route('role.store') }}">
+        <x-admin.form.input class="col-12 mb-5" label="Nama" name="name" type="text" value="" placeholder="Enter a name" required />
+    </x-admin.modal.create>
 
-    @include('admin.setting.role.modal')
+    <x-admin.modal.show>
+        <x-admin.form.input class="col-12 mb-5" label="Nama" name="name" id="name" type="text" value="" required />
+    </x-admin.modal.show>
+
+    <x-admin.form.delete />
 
 @endsection
 
-@section('create')
-    <div class="d-flex align-items-center gap-2 gap-lg-3">
-        <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#modal-form">Create</a>
-    </div>
-@endsection
+@section('head_button')
 
-@section('styles')
+    <x-admin.content.header-button>
+        <x-admin.button.modal-create />
+    </x-admin.content.header-button>
 
 @endsection
+
 
 @push('scripts')
 
-    <script>
-        document.getElementById('menu-setting').classList.add('show');
-        document.getElementById('menu-setting-role-user').classList.add('active');
-    </script>
-    <script>
-        "use strict";
-        var KTDatatablesBasicBasic = function() {
+    <x-admin.menu.show menu="menu-setting"/>
+    <x-admin.menu.active menu="menu-setting-role"/>
 
-        var initTable1 = function() {
-            var table = $('#datatable');
-            table.DataTable({
-                searchDelay: 500,
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('role-user.data') }}',
-                columns: [
-                    {data:'DT_RowIndex', orderable: false, searchable: false},
-                    {data:'name'},
-                    {data:'active'},
-                    {data:'action', responsivePriority: -1,orderable: false, searchable: false},
-                ],
-                columnDefs: [
-                    {
-                        targets: [0,2,3],
-                        className: 'dt-center',
-                    },
-                ],
-                dom:
-                    "<'row'" +
-                    "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
-                    "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
-                    ">" +
-                    "<'table-responsive'tr>" +
-                    "<'row'" +
-                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
-                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
-                ">",
-            });
-
-        };
-
-        return {
-            //main function to initiate the module
-            init: function() {
-                initTable1();
-            }
-        };
-        }();
-
-        jQuery(document).ready(function() {
-        KTDatatablesBasicBasic.init();
-        });
-    </script>
-    <script>
-        const form = document.getElementById('modal_form_form');
-        var validator = FormValidation.formValidation(
-            form,
+    <x-admin.script.table>
+        ajax: '{{ route('role.data') }}',
+        columns: [
+            {data:'DT_RowIndex', orderable: false, searchable: false},
+            {data:'name'},
+            {data:'use'},
+            {data:'action', responsivePriority: -1,orderable: false, searchable: false},
+        ],
+        columnDefs: [
             {
-                fields: {
-                    'name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Silahkan isi nama!'
-                            }
-                        }
-                    },
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
-        const submitButton = document.getElementById('modal_form_submit');
-        submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
-                        submitButton.disabled = true;
-                        form.submit();
+                targets: 0,
+                className: 'dt-center',
+                width: '40px',
+            },
+            {
+                targets: [-1,-2],
+                className: 'dt-center',
+            },
+        ],
+    </x-admin.script.table>
+    <x-admin.script.validation>
+        fields: {
+            'name': {
+                validators: {
+                    notEmpty: {
+                        message: 'Silahkan isi nama!'
                     }
-                });
-            }
+                }
+            },
+        },
+    </x-admin.script.validation>
+    <script>
+        $('body').on('click', '#btn-show', function () {
+            let data_id = $(this).data('id');
+            $.ajax({
+                url: "{{route('role.index')}}" + '/' + data_id,
+                type: "GET",
+                cache: false,
+                success:function(response){
+                    $('#data_id').val(response.data.id);
+                    $('#name').val(response.data.name);
+                    // $('#modal_update').val(response.data.id);
+                    $('#modal_update').val(response.data.id)
+                    $('#modal-show').modal('show');
+                }
+            });
+            document.getElementById("modal_update").action = "{{route('role.index')}}" + '/' + data_id;
         });
     </script>
 

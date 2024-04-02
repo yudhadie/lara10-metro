@@ -1,14 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\Setting\ContentCategoryController;
-use App\Http\Controllers\Admin\Setting\LogActivityController;
 use App\Http\Controllers\Admin\Setting\RoleUserController;
 use App\Http\Controllers\Admin\Setting\UserController;
+use App\Http\Controllers\Admin\Information\LogActivityController;
 use App\Http\Controllers\ErrorPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('coming-soon');
+
 });
 
 Route::middleware([
@@ -37,24 +36,14 @@ Route::middleware([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-    //Content
-    Route::resource('/content', ContentController::class);
-    Route::get('/content-data', [ContentController::class, 'data'])->name('content.data');
-
     //Setting
         //Activity
-        Route::get('/setting/log-activity', [LogActivityController::class, 'index'])->name('log-activity.index');
-        Route::get('/setting/log-activity/{id}', [LogActivityController::class, 'show'])->name('log-activity.show');
-        Route::get('/setting/log-activity-data', [LogActivityController::class, 'data'])->name('log-activity.data');
-        //Content Category
-        Route::resource('/setting/content-category', ContentCategoryController::class);
-        Route::get('/setting/content-category-data', [ContentCategoryController::class, 'data'])->name('content-category.data');
+        Route::get('/information/log-activity', [LogActivityController::class, 'index'])->name('log-activity.index');
+        Route::get('/information/log-activity/{id}', [LogActivityController::class, 'show'])->name('log-activity.show');
         //Role User
-        Route::resource('/setting/role-user', RoleUserController::class);
-        Route::get('/setting/role-user-data', [RoleUserController::class, 'data'])->name('role-user.data');
+        Route::resource('/setting/role', RoleUserController::class);
         //User
         Route::resource('/setting/user', UserController::class);
-        Route::get('/setting/user-data', [UserController::class, 'data'])->name('user.data');
 
     //Report
         //Users PDF
@@ -64,6 +53,12 @@ Route::middleware([
         //Delete
         Route::put('/photo/delete-user-profile/{id}', [PhotoController::class, 'deleteuser'])->name('delete-photo-user');
 
+    //Data
+    //Infromation
+    Route::get('/information/log-activity-data', [DataController::class, 'activity'])->name('log-activity.data');
+    //Setting
+    Route::get('/setting/role-data', [DataController::class, 'team'])->name('role.data');
+    Route::get('/setting/user-data', [DataController::class, 'user'])->name('user.data');
 });
 
 //Error

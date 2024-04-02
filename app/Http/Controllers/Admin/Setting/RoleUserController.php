@@ -14,7 +14,7 @@ class RoleUserController extends Controller
     {
         return view('admin.setting.role.index',[
             'title' => 'Role Users',
-            'breadcrumbs' => Breadcrumbs::render('role-user'),
+            'breadcrumbs' => Breadcrumbs::render('role'),
         ]);
     }
 
@@ -30,7 +30,7 @@ class RoleUserController extends Controller
         $data->user_id = Auth::user()->id;
         $data->save();
 
-        return redirect()->route('role-user.index')->with('success', 'Data Role berhasil ditambahkan');
+        return redirect()->route('role.index')->with('success', 'Data Role berhasil ditambahkan');
 
     }
 
@@ -40,8 +40,19 @@ class RoleUserController extends Controller
 
         return view('admin.setting.role.edit',[
             'title' => 'Edit Role User',
-            'breadcrumbs' => Breadcrumbs::render('role-user.edit',$data),
+            'breadcrumbs' => Breadcrumbs::render('role',$data),
             'data' => $data,
+        ]);
+    }
+
+    public function show($id)
+    {
+        $data = Team::find($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Data',
+            'data'    => $data
         ]);
     }
 
@@ -56,7 +67,7 @@ class RoleUserController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('role-user.index')->with('success', 'Data user berhasil diupdate');
+        return redirect()->route('role.index')->with('success', 'Data user berhasil diupdate');
     }
 
     public function destroy(string $id)
@@ -64,17 +75,7 @@ class RoleUserController extends Controller
         $data = Team::find($id);
         $data->delete();
 
-        return redirect()->route('role-user.index')->with('error', 'Data Role berhasil dihapus');
+        return redirect()->route('role.index')->with('error', 'Data Role berhasil dihapus');
     }
 
-    public function data()
-    {
-        $data = Team::orderBy('name','asc');
-
-        return datatables()->of($data)
-        ->addColumn('action', 'admin.setting.role.action')
-        ->addIndexColumn()
-        ->rawColumns(['action'])
-        ->toJson();
-    }
 }
